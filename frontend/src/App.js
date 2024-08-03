@@ -21,8 +21,12 @@ render(){
 <DataTable value={this.state.cliente}>
 
 <Column field="cedula" header="cedula"></Column>
-<Column field="nombre" header="name"></Column>
-
+<Column field="nombre" header="nombres"></Column>
+<Column field="apellido" header="apellidos"></Column>
+<Column field="edad" header="edad"></Column>
+<Column field="telefono" header="telefono"></Column>
+<Column field="correo" header="correo"></Column>
+<Column field="clave" header="clave"></Column>
 </DataTable>
 
 

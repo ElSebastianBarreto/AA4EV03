@@ -16,6 +16,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,9 +42,12 @@ public class ClientesController {
 	        return repo.findAll();
 	    }
 	
-	
-	
+	// funcion para buscar un cliente mediante cedula
+	@GetMapping(value = "/find/{cedula}")
+	public Cliente find(@PathVariable int cedula)
+	{return repo.get(cedula);}
 	///
+	
 
 }
 	

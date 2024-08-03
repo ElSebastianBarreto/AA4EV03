@@ -67,52 +67,59 @@ render(){
 <Column field="correo" header="correo"></Column>
 <Column field="clave" header="clave"></Column>
 </DataTable>
+
 <dialog header="Crear cliente" visible={this.state.visible} style={{width:'60%'}} modal={true} onHide={() => this.setState({visible: false})}>
-  <InputText value={this.state.value} id="cedula"onChange={(e) => this.setState(prevState => {
+  <InputText value={this.state.cliente.cedula} id="cedula"onChange={(e) =>{ this.setState(prevState => {
+    let val = e.target.value;
     let cliente = Object.assign({}, prevState.cliente)
     cliente.cedula = e.target.value
     return{cliente};
-    })}></InputText>
+    })}}></InputText>
     <label htmlFor="cedula ">cedula</label>
 
-    <InputText value={this.state.value} id="nombre"onChange={(e) => this.setState(prevState => {
+    <InputText value={this.state.cliente.nombre} id="nombre"onChange={(e) =>{ this.setState(prevState => {
+       let val = e.target.value;
     let cliente = Object.assign({}, prevState.cliente)
     cliente.nombre = e.target.value
 
     return{cliente};
-    })}></InputText>
+    })}}></InputText>
     <label htmlFor="nombre ">nombre</label>
 
-    <InputText value={this.state.value} id="apellido"onChange={(e) => this.setState(prevState => {
+    <InputText value={this.state.cliente.apellido} id="apellido"onChange={(e) => {this.setState(prevState => {
+       let val = e.target.value;
     let cliente = Object.assign({}, prevState.cliente)
     cliente.apellido = e.target.value
 
     return{cliente};
-    })}></InputText>
+    })}}></InputText>
     <label htmlFor="apellido ">apellido</label>
 
-    <InputText value={this.state.value} id="telefono"onChange={(e) => this.setState(prevState => {
+    <InputText value={this.state.cliente.telefono} id="telefono"onChange={(e) =>{ this.setState(prevState => {
+       let val = e.target.value;
     let cliente = Object.assign({}, prevState.cliente)
     cliente.telefono = e.target.value
 
     return{cliente};
-    })}></InputText>
+    })}}></InputText>
     <label htmlFor="telefono ">telefono</label>
 
-    <InputText value={this.state.value} id="correo"onChange={(e) => this.setState(prevState => {
+    <InputText value={this.state.cliente.correo} id="correo"onChange={(e) =>{ this.setState(prevState => {
+       let val = e.target.value;
     let cliente = Object.assign({}, prevState.cliente)
     cliente.correo = e.target.value
 
     return{cliente};
-    })}></InputText>
+    })}}></InputText>
     <label htmlFor="correo ">correo</label>
 
-    <InputText value={this.state.value} id="clave"onChange={(e) => this.setState(prevState => {
+    <InputText value={this.state.cliente.clave} id="clave"onChange={(e) => {this.setState(prevState => {
+       let val = e.target.value;
     let cliente = Object.assign({}, prevState.cliente)
     cliente.clave = e.target.value
 
     return{cliente};
-    })}></InputText>
+    })}}></InputText>
     <label htmlFor="clave ">clave</label>
 </dialog>
 </div>

@@ -6,4 +6,8 @@ export class ClienteService{
     getAll(){
         return axios.get(this.baseUrl).then(res => res.data);
     }
+//guarda clientes
+    save(cliente){
+        return axios.get(this.baseUrl, cliente).then(res => res.data);
+    }
 }

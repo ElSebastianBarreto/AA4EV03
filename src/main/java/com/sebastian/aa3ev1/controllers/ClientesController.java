@@ -1,64 +1,52 @@
 package com.sebastian.aa3ev1.controllers;
 
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.sql.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
-
-import com.sebastian.aa3ev1.models.Cliente;
-import com.sebastian.aa3ev1.models.ClienteDto;
+import com.sebastian.aa3ev1.commons.*;
+import com.sebastian.aa3ev1.controllers.*;
 import com.sebastian.aa3ev1.services.ClientesRepository;
 
-import jakarta.validation.Valid;
-
-@CrossOrigin("*")
-@RestController
+@Controller
+@RequestMapping("/home")
 public class ClientesController {
-
 	@Autowired
 	private ClientesRepository repo;
-	
-	
-	 @GetMapping("/clientes")
-	    public List<Cliente> getAllProducts() {
-	        return repo.findAll();
-	    }
-	
-	// funcion para buscar un cliente mediante cedula
-	@GetMapping(value = "/find/{cedula}")
-	public Cliente find(@PathVariable int cedula)
-	{return repo.get(cedula);}
-	///
-	
-	//funcion de guardar y enviar al servidor
-	@PostMapping(value ="/guardar")
-	public ResponseEntity<Cliente> save(@RequestBody Cliente Cliente){
-		
-		Cliente obj = ResponseEntity.save(Cliente);
-		return new ResponseEntity<Cliente>(obj, HttpStatus.ok);
+
+	@RequestMapping("/")
+	public String index(Model model) {
+		model.addAttribute("list", ClientesRepository.getAll());
+		return "index";
 	}
 
-	
-	
+	@GetMapping("/create")
+	public String create(Model model) {
+		model.addAttribute("persona", new Persona());
+		return "save";
+	}
+
+	@GetMapping("/save/{id}")
+	public String showSave(@PathVariable("id") Long id, Model model) {
+		if (id != null && id != 0) {
+			model.addAttribute("persona", personaServiceAPI.get(id));
+		} else {
+			model.addAttribute("persona", new Persona());
+		}
+		return "save";
+	}
+
+	@PostMapping("/save")
+	public String save(Persona persona, Model model) {
+		personaServiceAPI.save(persona);
+		return "redirect:/home/";
+	}
+
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable Long id, Model model) {
+		personaServiceAPI.delete(id);
+
+		return "redirect:/home/";
+	}
+
 }
-	
